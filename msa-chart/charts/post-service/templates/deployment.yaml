@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product-service
+  name: post-service
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -12,17 +12,17 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: product-service
+      app: post-service
   template:
     metadata:
       labels:
-        app: product-service
+        app: post-service
     # pod에 세팅되는 컨테이너 설정
     spec:
       imagePullSecrets:
         - name: ecr-secret
       containers:
-        - name: product-service
+        - name: post-service
           image: {{ .Values.image }}
           imagePullPolicy: Always
           ports:
