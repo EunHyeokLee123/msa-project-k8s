@@ -28,13 +28,18 @@ spec:
     solvers: # 도메인 소유권을 검증하기 위한 로직을 정의.
       - http01:
           ingress:
-            class: nginx # 우리가 사용하는 nginx ingress controller를 사용하여 인증을 처리하겠다.
+            ingressClassName: nginx
+            ingressTemplate:
+              metadata:
+                annotations:
+                  nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
 ---   # 파일 하나에 k8s 오브젝트를 여러개 선언할 시 각 오브젝트를 구분하는 줄 (지우면 안됨.)
 # 3.ClusterIssue를 사용하여 Certificate 리소스 생성 : Certificate리소스 생성시에 인증서 발급
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: api-msaproject-tls
+  name: api-msa-project-tls
   namespace: default
 spec:
   secretName: api-msa-project-tls # 발급된 인증서를 저장할 k8s secret name

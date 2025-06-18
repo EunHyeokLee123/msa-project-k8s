@@ -19,7 +19,7 @@ spec:
   tls:
     - hosts:
         - api.infolearnplaydata123456.shop
-      secretName: api-msaproject-tls
+      secretName: api-msa-project-tls
   rules:
     - host: api.infolearnplaydata123456.shop
       http:
